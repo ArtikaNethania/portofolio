@@ -1,0 +1,1052 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Aika — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+/* ─── DESIGN PLAN ───────────────────────────────────────────────────────────
+   Layout: Full-bleed dark navy canvas, sections as floating frosted-glass cards
+   Color: Deep navy + soft pastel gradients (lavender, pink, sage) on dark
+   Type: Space Grotesk (display/headings) + DM Sans (body) + Space Mono (code/labels)
+   Mood: Futuristic-cozy — stars, soft glows, playful but polished
+──────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --bg: #070b18;
+  --bg2: #0d1225;
+  --surface: rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.07);
+  --border: rgba(255,255,255,0.08);
+  --fg: #e8ecf4;
+  --fg-muted: rgba(232,236,244,0.55);
+  --fg-dim: rgba(232,236,244,0.35);
+
+  --lavender: #c4b5fd;
+  --lavender-glow: rgba(196,181,253,0.15);
+  --pink: #f9a8d4;
+  --pink-glow: rgba(249,168,212,0.12);
+  --sage: #86efac;
+  --sage-glow: rgba(134,239,172,0.12);
+  --sky: #7dd3fc;
+  --peach: #fdba74;
+
+  --grad-hero: linear-gradient(135deg, #c4b5fd22 0%, #f9a8d414 50%, #7dd3fc18 100%);
+  --grad-card: linear-gradient(135deg, rgba(196,181,253,0.06), rgba(249,168,212,0.04));
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  --radius: 16px;
+  --radius-sm: 8px;
+  --glow-lavender: 0 0 60px rgba(196,181,253,0.2), 0 0 120px rgba(196,181,253,0.08);
+  color-scheme: dark;
+}
+
+/* single dark theme — committed dark design */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100%;
+  overflow-x: hidden;
+  padding-inline: 0;
+}
+
+/* ─── STARS CANVAS ────────────────────────────────────────────────────────── */
+#stars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* ─── AMBIENT BLOBS ──────────────────────────────────────────────────────── */
+.blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
+}
+.blob-1 { width: 500px; height: 500px; background: #c4b5fd; top: -150px; left: -150px; }
+.blob-2 { width: 400px; height: 400px; background: #f9a8d4; top: 30%; right: -120px; }
+.blob-3 { width: 350px; height: 350px; background: #7dd3fc; bottom: 10%; left: 10%; }
+
+/* ─── NAV ─────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: rgba(7,11,24,0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: linear-gradient(90deg, var(--lavender), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+}
+.nav-links {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.03em;
+}
+.nav-links a:hover {
+  color: var(--lavender);
+  border-color: var(--lavender);
+  background: var(--lavender-glow);
+}
+
+/* ─── LAYOUT ──────────────────────────────────────────────────────────────── */
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+section {
+  padding-block: 80px;
+}
+
+/* ─── HERO ────────────────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--lavender);
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s ease forwards;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.35s ease forwards;
+}
+.hero-name .hi { color: var(--fg-muted); font-weight: 300; }
+.hero-name .name {
+  display: block;
+  background: linear-gradient(135deg, var(--lavender) 0%, var(--pink) 50%, var(--sky) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 400;
+  color: var(--fg-muted);
+  margin-top: 12px;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.5s ease forwards;
+}
+.hero-title strong { color: var(--lavender); font-weight: 600; }
+
+.hero-desc {
+  max-width: 540px;
+  color: var(--fg-muted);
+  line-height: 1.75;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.65s ease forwards;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s ease forwards;
+}
+
+.btn-primary {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--bg);
+  background: linear-gradient(135deg, var(--lavender), var(--pink));
+  border: none;
+  border-radius: 50px;
+  padding: 12px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 12px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.btn-ghost:hover { border-color: var(--lavender); color: var(--lavender); background: var(--lavender-glow); }
+
+.hero-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 52px;
+  opacity: 0;
+  animation: fadeUp 0.6s 1s ease forwards;
+}
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  letter-spacing: 0.04em;
+}
+.chip.active { border-color: rgba(196,181,253,0.4); color: var(--lavender); background: var(--lavender-glow); }
+
+/* ─── SECTION HEADINGS ───────────────────────────────────────────────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--lavender);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-wrap: balance;
+  margin-bottom: 48px;
+}
+.section-heading em {
+  font-style: normal;
+  background: linear-gradient(90deg, var(--lavender), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── PROJECT CARDS ──────────────────────────────────────────────────────── */
+.projects-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--grad-card);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.project-card:hover {
+  border-color: rgba(196,181,253,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(196,181,253,0.1);
+}
+.project-card:hover::before { opacity: 1; }
+
+.project-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.project-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.project-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+.badge-ai { background: rgba(196,181,253,0.15); color: var(--lavender); border: 1px solid rgba(196,181,253,0.3); }
+.badge-cv { background: rgba(125,211,252,0.12); color: var(--sky); border: 1px solid rgba(125,211,252,0.25); }
+.badge-xai { background: rgba(134,239,172,0.12); color: var(--sage); border: 1px solid rgba(134,239,172,0.25); }
+.badge-web { background: rgba(249,168,212,0.12); color: var(--pink); border: 1px solid rgba(249,168,212,0.25); }
+.badge-mobile { background: rgba(253,186,116,0.12); color: var(--peach); border: 1px solid rgba(253,186,116,0.25); }
+
+.project-links {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.project-link {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--fg-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.project-link:hover { border-color: var(--lavender); color: var(--lavender); background: var(--lavender-glow); }
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.project-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+}
+
+.project-desc {
+  color: var(--fg-muted);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.project-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+.project-highlights li {
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+.project-highlights li::before {
+  content: '▹';
+  color: var(--lavender);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.project-stack {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.stack-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 3px 8px;
+}
+
+/* ─── ABOUT ──────────────────────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.about-text p {
+  color: var(--fg-muted);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  font-size: 0.97rem;
+}
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--fg); }
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--lavender), var(--pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ─── SKILLS ─────────────────────────────────────────────────────────────── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.skill-group {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+}
+.skill-group-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--lavender);
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.skill-group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.skill-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.skill-list li {
+  font-size: 0.88rem;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.skill-list li::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--lavender);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+
+/* ─── CONTACT ────────────────────────────────────────────────────────────── */
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.contact-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 100%, rgba(196,181,253,0.12), transparent 60%);
+  pointer-events: none;
+}
+.contact-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.contact-card p {
+  color: var(--fg-muted);
+  max-width: 400px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.contact-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--fg-muted);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 10px 20px;
+  transition: all 0.2s;
+}
+.contact-link:hover {
+  border-color: var(--lavender);
+  color: var(--lavender);
+  background: var(--lavender-glow);
+}
+.contact-email-display {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--lavender);
+  background: var(--lavender-glow);
+  border: 1px solid rgba(196,181,253,0.25);
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  margin: 0 auto 24px;
+  display: inline-block;
+  letter-spacing: 0.03em;
+  user-select: all;
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 32px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-dim);
+  letter-spacing: 0.06em;
+}
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── DIVIDER ─────────────────────────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 0;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  nav { padding: 14px 20px; }
+  .nav-links { display: none; }
+  main { padding: 0 16px 60px; }
+  section { padding-block: 56px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .project-top { flex-direction: column; }
+  .project-links { align-self: flex-end; }
+  .contact-card { padding: 32px 24px; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+
+<!-- Stars canvas -->
+<canvas id="stars"></canvas>
+
+<!-- Ambient blobs -->
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+<div class="blob blob-3"></div>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-logo">aika.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<main>
+  <!-- Hero -->
+  <section id="hero">
+    <p class="hero-eyebrow">// ARTIKA NETHANIA JOANA B. SOMPIE</p>
+    <h1 class="hero-name">
+      <span class="hi">Hi, I'm</span>
+      <span class="name">Aika.</span>
+    </h1>
+    <p class="hero-title">Computer Science Student — <strong>AI & Machine Learning</strong></p>
+    <p class="hero-desc">
+      Building intelligent systems that actually work — from NLP models and computer vision pipelines to interactive web apps.
+      Based in Tangerang, currently at BINUS University (AI stream), open to internship opportunities.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-ghost">Get in touch</a>
+    </div>
+    <div class="hero-chips">
+      <span class="chip active">Machine Learning</span>
+      <span class="chip active">Natural Language Processing</span>
+      <span class="chip active">Computer Vision</span>
+      <span class="chip">Web Development</span>
+      <span class="chip">Python</span>
+      <span class="chip">Open to Internship</span>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- About -->
+  <section id="about">
+    <p class="section-label reveal">// about me</p>
+    <h2 class="section-heading reveal">A student who builds <em>real things.</em></h2>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>
+          I'm a Computer Science undergraduate at <strong>BINUS University</strong>, specializing in Artificial Intelligence.
+          I care about turning research into something you can actually run — models that ship, demos that work, and code that doesn't break at 2am.
+        </p>
+        <p>
+          My main focus is AI/ML, but I also build full-stack web apps because connecting a smart model to a usable interface is where things get interesting.
+          I'm equally comfortable reading a paper and writing a REST API.
+        </p>
+        <p>
+          Outside of code, I teach basic English to kids at an orphanage through TFISC, organize tech events at BNCC, and collect way too many playlists.
+        </p>
+      </div>
+      <div class="about-stats reveal">
+        <div class="stat-card">
+          <span class="stat-num">89.7%</span>
+          <span class="stat-label">BEST NLP ACCURACY</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">98%</span>
+          <span class="stat-label">FACE RECOGNITION CONFIDENCE</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">1000+</span>
+          <span class="stat-label">EVENT PARTICIPANTS REACHED</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">5+</span>
+          <span class="stat-label">PROJECTS SHIPPED</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Projects -->
+  <section id="projects">
+    <p class="section-label reveal">// what i've built</p>
+    <h2 class="section-heading reveal">Projects that <em>ship.</em></h2>
+
+    <div class="projects-grid">
+
+      <!-- Project 1: NLP -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-meta">
+            <span class="project-badge badge-ai">NLP</span>
+            <span class="project-badge badge-ai">ML</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/ArtikaNethania/AoL-NLP-fake-review-detector" target="_blank" title="GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a class="project-link" href="https://aol-nlp-fake-review-detector.streamlit.app" target="_blank" title="Live Demo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="project-title">Fake Review Detection System</h3>
+        <p class="project-sub">Mar 2026 – Jun 2026 · NLP / Machine Learning</p>
+        <p class="project-desc">
+          Compared four NLP approaches — Logistic Regression, SVM, Random Forest, and RoBERTa — on detecting fake hotel reviews, then evaluated cross-domain generalization on Yelp data.
+        </p>
+        <ul class="project-highlights">
+          <li>Trained and compared 4 models on 1,600 hotel reviews (Deceptive Opinion Spam Corpus); best in-domain accuracy <strong>89.69%</strong> (Logistic Regression)</li>
+          <li>Cross-domain evaluation on 2,483 Yelp reviews — RoBERTa showed best generalization (F1: 0.60 vs. classical models)</li>
+          <li>Deployed as a real-time interactive web app via Streamlit</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Scikit-learn</span>
+          <span class="stack-tag">RoBERTa</span>
+          <span class="stack-tag">Transformers</span>
+          <span class="stack-tag">Streamlit</span>
+          <span class="stack-tag">NLTK</span>
+        </div>
+      </div>
+
+      <!-- Project 2: Smart Attendance -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-meta">
+            <span class="project-badge badge-cv">Computer Vision</span>
+            <span class="project-badge badge-web">Full Stack</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/ArtikaNethania" target="_blank" title="GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="project-title">Smart Attendance with Face Recognition</h3>
+        <p class="project-sub">Feb 2026 – Jun 2026 · Computer Vision / Full Stack</p>
+        <p class="project-desc">
+          Automated attendance system using a custom computer vision pipeline — from face detection and image enhancement to feature extraction and classification.
+        </p>
+        <ul class="project-highlights">
+          <li>Haar Cascade for face detection → CLAHE for image enhancement → HOG + LBPH feature extraction → XGBoost classification, achieving <strong>98% confidence score</strong></li>
+          <li>FastAPI backend serving real-time predictions; React frontend for live attendance dashboard</li>
+          <li>Handles varying lighting and image quality through CLAHE preprocessing</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">OpenCV</span>
+          <span class="stack-tag">XGBoost</span>
+          <span class="stack-tag">FastAPI</span>
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">LBPH</span>
+        </div>
+      </div>
+
+      <!-- Project 3: SHAP/LIME -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-meta">
+            <span class="project-badge badge-xai">XAI</span>
+            <span class="project-badge badge-ai">Research</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/ArtikaNethania" target="_blank" title="GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="project-title">ML Explainability: SHAP vs LIME</h3>
+        <p class="project-sub">Feb 2026 – Jun 2026 · Explainable AI / Research</p>
+        <p class="project-desc">
+          Comparative analysis of two XAI methods across two model architectures, measuring consistency, computational cost, and real interpretability.
+        </p>
+        <ul class="project-highlights">
+          <li>Applied SHAP and LIME to Logistic Regression and Random Forest on the Vertebral Column dataset</li>
+          <li>Analyzed consistency of feature importance rankings, computation time, and explanation stability</li>
+          <li>Found SHAP more consistent for global interpretability; LIME more flexible for local explanations</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span>
+          <span class="stack-tag">Scikit-learn</span>
+          <span class="stack-tag">SHAP</span>
+          <span class="stack-tag">LIME</span>
+          <span class="stack-tag">Matplotlib</span>
+          <span class="stack-tag">Pandas</span>
+        </div>
+      </div>
+
+      <!-- Project 4: HopeLink -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-meta">
+            <span class="project-badge badge-web">Web App</span>
+            <span class="project-badge badge-mobile">Full Stack</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/ArtikaNethania" target="_blank" title="GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="project-title">HopeLink</h3>
+        <p class="project-sub">2025 · Web Application / Social Impact</p>
+        <p class="project-desc">
+          A donation and volunteer coordination platform connecting donors and volunteers with verified charities and social causes.
+        </p>
+        <ul class="project-highlights">
+          <li>Built donation flow, volunteer registration, and charity verification system</li>
+          <li>Full-stack web application with user authentication and dashboard</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">React</span>
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">HTML/CSS</span>
+        </div>
+      </div>
+
+      <!-- Project 5: cryPIto -->
+      <div class="project-card reveal">
+        <div class="project-top">
+          <div class="project-meta">
+            <span class="project-badge badge-web">Web App</span>
+          </div>
+          <div class="project-links">
+            <a class="project-link" href="https://github.com/ArtikaNethania" target="_blank" title="GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+        <h3 class="project-title">cryPIto</h3>
+        <p class="project-sub">2025 · Cryptography / Education</p>
+        <p class="project-desc">
+          An interactive web app for learning and applying classical and modern cryptography — encrypting, decrypting, and visualizing cipher algorithms.
+        </p>
+        <ul class="project-highlights">
+          <li>Implemented multiple cipher algorithms with step-by-step visual breakdowns</li>
+          <li>Clean, interactive UI for encoding/decoding text in real time</li>
+        </ul>
+        <div class="project-stack">
+          <span class="stack-tag">JavaScript</span>
+          <span class="stack-tag">HTML</span>
+          <span class="stack-tag">CSS</span>
+          <span class="stack-tag">Python</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Skills -->
+  <section id="skills">
+    <p class="section-label reveal">// toolkit</p>
+    <h2 class="section-heading reveal">What I work <em>with.</em></h2>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-title">AI / ML</div>
+        <ul class="skill-list">
+          <li>Python</li>
+          <li>Scikit-learn</li>
+          <li>PyTorch</li>
+          <li>Transformers (HuggingFace)</li>
+          <li>OpenCV</li>
+          <li>SHAP / LIME</li>
+          <li>Streamlit</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Data</div>
+        <ul class="skill-list">
+          <li>Pandas / NumPy</li>
+          <li>Matplotlib / Seaborn</li>
+          <li>Jupyter Notebook</li>
+          <li>MySQL</li>
+          <li>Data Preprocessing</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Web Dev</div>
+        <ul class="skill-list">
+          <li>JavaScript</li>
+          <li>React</li>
+          <li>HTML / CSS</li>
+          <li>FastAPI</li>
+          <li>Node.js</li>
+          <li>REST APIs</li>
+        </ul>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Tools & Other</div>
+        <ul class="skill-list">
+          <li>Git / GitHub</li>
+          <li>Figma</li>
+          <li>C / Java</li>
+          <li>VS Code</li>
+          <li>Linux</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- Contact -->
+  <section id="contact">
+    <p class="section-label reveal">// let's talk</p>
+    <h2 class="section-heading reveal">Open to <em>opportunities.</em></h2>
+    <div class="contact-card reveal">
+      <h3>Looking for an AI/ML intern?</h3>
+      <p>I'm currently looking for internship opportunities in AI, ML, or software development. Let's build something together.</p>
+      <div class="contact-email-display">ikaaneth@gmail.com</div>
+      <div class="contact-links">
+        <a class="contact-link" href="https://linkedin.com/in/artikanethania" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="contact-link" href="https://github.com/ArtikaNethania" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Built with ✦ by Aika · 2026 · anethania.site</p>
+</footer>
+
+<script>
+// ─── STARS ──────────────────────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function init() {
+    stars = [];
+    for (let i = 0; i < 180; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.2,
+        a: Math.random() * 0.7 + 0.1,
+        speed: Math.random() * 0.003 + 0.001,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw(t) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const s of stars) {
+      const alpha = s.a * (0.5 + 0.5 * Math.sin(t * s.speed * 1000 + s.phase));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(196,181,253,${alpha})`;
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  init();
+  window.addEventListener('resize', () => { resize(); init(); });
+  requestAnimationFrame(draw);
+})();
+
+// ─── REVEAL ON SCROLL ───────────────────────────────────────────────────────
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+
+</body></html>

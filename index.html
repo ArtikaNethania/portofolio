@@ -355,18 +355,69 @@ footer span{color:var(--pink)}
   .nav-links{display:none}
   .nav-hamburger{display:flex}
   .about-grid{grid-template-columns:1fr;gap:40px}
-  .photo-wrap{width:100%;max-width:260px;margin:0 auto}
-  .photo-frame{width:100%;max-width:240px;height:290px}
+  .photo-wrap{width:100%;max-width:280px;margin:0 auto}
+  .photo-frame{width:270px;height:330px}
+  .exp-grid{grid-template-columns:1fr}
+  .skills-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:640px){
-  section{padding:60px 16px}
-  #hero{padding:100px 16px 60px}
-  .hero-cta-row{gap:8px}
+  /* Layout */
+  section{padding:56px 18px}
+  #hero{padding:96px 18px 64px;min-height:100svh}
+  .section-inner{width:100%}
+
+  /* Navbar */
+  nav{top:14px;padding:10px 18px;gap:14px}
+  .nav-logo{font-size:.95rem}
+
+  /* Hero text */
+  .hero-name{font-size:clamp(2.4rem,13vw,3.8rem);letter-spacing:-.03em}
+  .hero-sub{font-size:clamp(1rem,4.5vw,1.3rem)}
+  .greeting-row{font-size:clamp(.85rem,3.5vw,1.1rem)}
+  .typewriter-wrap{font-size:clamp(.72rem,3vw,.85rem);margin-bottom:28px}
+
+  /* Hero buttons */
+  .hero-cta{gap:8px}
+  .hero-cta-row{gap:8px;flex-wrap:wrap;justify-content:center}
   .btn{padding:9px 16px;font-size:.82rem}
+  .btn-cv{width:100%;max-width:220px;justify-content:center}
+
+  /* About */
+  .about-grid{grid-template-columns:1fr;gap:32px;text-align:center}
+  .photo-wrap{max-width:220px}
+  .photo-frame{width:210px;height:260px}
+  .photo-frame:hover{transform:rotate(0deg) scale(1.01)}
+  .about-text p{font-size:.92rem}
+  .fun-pills{justify-content:center}
+
+  /* Section title */
+  .section-title{font-size:clamp(1.7rem,7vw,2.4rem)}
+
+  /* Experience */
+  .exp-grid{grid-template-columns:1fr}
+  .exp-card{padding:20px}
+
+  /* Skills */
+  .skills-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .skill-card{padding:14px 8px}
+  .skill-name{font-size:.7rem}
+
+  /* Projects */
+  .proj-fs-inner{padding:24px 18px}
+  .proj-fullscreen{min-height:320px}
+  .proj-fs-name{font-size:clamp(1.4rem,6vw,2rem)}
+
+  /* Contact */
   .contact-links{gap:8px}
-  .contact-link{padding:9px 16px;font-size:.82rem}
-  .proj-fs-inner{padding:28px 24px}
-  .proj-fullscreen{min-height:360px}
+  .contact-link{padding:10px 14px;font-size:.82rem}
+  .contact-headline{font-size:clamp(1.8rem,8vw,2.6rem)}
+  .contact-sub{font-size:.9rem}
+
+  /* Badge */
+  .photo-badge{font-size:.7rem;padding:7px 10px;bottom:-20px;right:-10px}
+
+  /* Scroll hint */
+  .scroll-hint{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:.01ms!important;transition-duration:.01ms!important}
